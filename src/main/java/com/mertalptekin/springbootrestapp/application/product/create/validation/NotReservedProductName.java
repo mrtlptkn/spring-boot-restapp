@@ -1,4 +1,4 @@
-package com.mertalptekin.springbootrestapp.application.product.createProduct.validation;
+package com.mertalptekin.springbootrestapp.application.product.create.validation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

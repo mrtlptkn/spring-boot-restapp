@@ -1,4 +1,4 @@
-package com.mertalptekin.springbootrestapp.application.product.updateProduct;
+package com.mertalptekin.springbootrestapp.application.product.update;
 import com.mertalptekin.springbootrestapp.application.product.IProductRequestHandler;
 import com.mertalptekin.springbootrestapp.domain.entity.Product;
 import com.mertalptekin.springbootrestapp.domain.service.product.IProductService;

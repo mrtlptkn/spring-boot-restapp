@@ -1,4 +1,4 @@
-package com.mertalptekin.springbootrestapp.application.product.updateProduct;
+package com.mertalptekin.springbootrestapp.application.product.update;
 
 import com.mertalptekin.springbootrestapp.application.product.IProductResponse;
 import lombok.AllArgsConstructor;

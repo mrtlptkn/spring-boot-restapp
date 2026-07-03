@@ -1,7 +1,7 @@
-package com.mertalptekin.springbootrestapp.application.product.createProduct;
+package com.mertalptekin.springbootrestapp.application.product.create;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mertalptekin.springbootrestapp.application.product.IProductRequest;
-import com.mertalptekin.springbootrestapp.application.product.createProduct.validation.NotReservedProductName;
+import com.mertalptekin.springbootrestapp.application.product.create.validation.NotReservedProductName;
 import jakarta.validation.constraints.*;
 
 

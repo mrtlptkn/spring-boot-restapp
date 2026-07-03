@@ -1,4 +1,4 @@
-package com.mertalptekin.springbootrestapp.application.product.deleteProduct;
+package com.mertalptekin.springbootrestapp.application.product.delete;
 
 import com.mertalptekin.springbootrestapp.application.product.IProductRequestHandler;
 import com.mertalptekin.springbootrestapp.domain.entity.Product;

@@ -1,4 +1,4 @@
-package com.mertalptekin.springbootrestapp.application.product.updateProduct;
+package com.mertalptekin.springbootrestapp.application.product.update;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mertalptekin.springbootrestapp.application.product.IProductRequest;

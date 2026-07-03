@@ -1,4 +1,4 @@
-package com.mertalptekin.springbootrestapp.application.product.createProduct;
+package com.mertalptekin.springbootrestapp.application.product.create;
 
 import com.mertalptekin.springbootrestapp.domain.entity.Product;
 import com.mertalptekin.springbootrestapp.domain.service.product.IProductService;

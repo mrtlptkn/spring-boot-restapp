@@ -1,11 +1,10 @@
-package com.mertalptekin.springbootrestapp.application.product.createProduct;
+package com.mertalptekin.springbootrestapp.application.product.create;
 
 
 import com.mertalptekin.springbootrestapp.application.product.IProductRequestHandler;
 import com.mertalptekin.springbootrestapp.domain.entity.Product;
 import com.mertalptekin.springbootrestapp.domain.service.product.IProductService;
 import com.mertalptekin.springbootrestapp.infra.service.IEmailSender;
-import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;

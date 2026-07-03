@@ -2,16 +2,16 @@ package com.mertalptekin.springbootrestapp.presentation.controller;
 
 
 import com.mertalptekin.springbootrestapp.application.product.IProductRequestHandler;
-import com.mertalptekin.springbootrestapp.application.product.createProduct.CreateProductRequest;
-import com.mertalptekin.springbootrestapp.application.product.createProduct.CreateProductResponse;
-import com.mertalptekin.springbootrestapp.application.product.deleteProduct.DeleteProductRequest;
-import com.mertalptekin.springbootrestapp.application.product.deleteProduct.DeleteProductResponse;
+import com.mertalptekin.springbootrestapp.application.product.create.CreateProductRequest;
+import com.mertalptekin.springbootrestapp.application.product.create.CreateProductResponse;
+import com.mertalptekin.springbootrestapp.application.product.delete.DeleteProductRequest;
+import com.mertalptekin.springbootrestapp.application.product.delete.DeleteProductResponse;
 import com.mertalptekin.springbootrestapp.application.product.discountPrice.DiscountPriceRequest;
 import com.mertalptekin.springbootrestapp.application.product.discountPrice.DiscountPriceResponse;
 import com.mertalptekin.springbootrestapp.application.product.getProductById.GetProductByIdRequest;
 import com.mertalptekin.springbootrestapp.application.product.getProductById.GetProductByIdResponse;
-import com.mertalptekin.springbootrestapp.application.product.updateProduct.UpdateProductRequest;
-import com.mertalptekin.springbootrestapp.application.product.updateProduct.UpdateProductResponse;
+import com.mertalptekin.springbootrestapp.application.product.update.UpdateProductRequest;
+import com.mertalptekin.springbootrestapp.application.product.update.UpdateProductResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,7 +19,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
