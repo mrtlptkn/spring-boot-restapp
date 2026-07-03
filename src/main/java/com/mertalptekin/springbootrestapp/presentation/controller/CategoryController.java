@@ -1,11 +1,13 @@
 package com.mertalptekin.springbootrestapp.presentation.controller;
 
 import com.mertalptekin.springbootrestapp.application.category.CategoryResponseDto;
+import com.mertalptekin.springbootrestapp.application.category.CreateCategoryRequest;
 import com.mertalptekin.springbootrestapp.application.category.ProductResponseDto;
 import com.mertalptekin.springbootrestapp.domain.entity.Category;
 import com.mertalptekin.springbootrestapp.domain.entity.Product;
 import com.mertalptekin.springbootrestapp.infra.repository.ICategoryRepository;
 import com.mertalptekin.springbootrestapp.infra.repository.IProductRepository;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,10 +36,18 @@ public class CategoryController {
         this.modelMapper = modelMapper;
     }
 
-    // api/categories?id=5
+    // api/categories -> tüm kategorileri getirir
+    // api/categories?id=5 -> tek bir kategoriyi getirir
 
     @GetMapping
-    public ResponseEntity<String> getCategories(@RequestParam(required = false) Integer id) {
+    public ResponseEntity<Object> getCategories(@RequestParam(required = false) Integer id) {
+
+        if (id == null) {
+            List<CategoryResponseDto> categories = categoryRepository.findAll().stream()
+                    .map(category -> modelMapper.map(category, CategoryResponseDto.class))
+                    .toList();
+            return ResponseEntity.ok(categories);
+        }
 
        Optional<Category> category = categoryRepository.findById(id);
 
@@ -44,11 +55,23 @@ public class CategoryController {
         // ama kategori ile birlikte kategoriye ait ürünler üzerinde de çalışacak isek bu durumda eager fetch kullanmak daha mantıklı olur.
 
        if(category.isPresent()) {
-           return ResponseEntity.ok("Category Name: " + category.get().getProducts().get(0).getName());
+           return ResponseEntity.ok("Category Name: " + category.get().getName());
        } else {
            return ResponseEntity.notFound().build();
 
        }
+    }
+
+    @PostMapping
+    public ResponseEntity<CategoryResponseDto> createCategory(@Valid @RequestBody CreateCategoryRequest request) {
+        Category category = new Category();
+        category.setName(request.name());
+
+        Category saved = categoryRepository.save(category);
+
+        CategoryResponseDto response = modelMapper.map(saved, CategoryResponseDto.class);
+        URI uri = URI.create("/api/v1/categories/" + saved.getId());
+        return ResponseEntity.created(uri).body(response);
     }
 
     @GetMapping("/withProducts")

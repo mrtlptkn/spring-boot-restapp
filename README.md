@@ -177,7 +177,7 @@ Tüm iş endpoint'leri `/api/v1/...` altında versiyonlanmıştır.
 |---|---|---|
 | `AuthController` | `/api/v1/auth` | Kayıt (`POST /`), token üretme (`POST /token`) — herkese açık |
 | `ProductController` | `/api/v1/products` | CRUD + `PATCH /{id}/discount` (indirim, `@Transactional`) |
-| `CategoryController` | `/api/v1/categories` | Kategori sorgulama, pagination/sorting örneği |
+| `CategoryController` | `/api/v1/categories` | Listeleme (`GET /`), oluşturma (`POST /`), silme, pagination/sorting örneği |
 | `CourseController` | `/api/v1/courses` | İkinci veritabanı (secondarydb) örneği |
 | `AdminController` | `/api/v1/admins` | `ROLE_ADMIN` + `ROLE_MANAGER` gerektirir |
 | `DemoController` | `/api/v1/demo` | AOP ve `@Lazy`/circular dependency demoları |
@@ -295,6 +295,23 @@ curl -X PATCH http://localhost:8080/api/v1/products/1/discount \
 ```
 
 ### Category (`/api/v1/categories`) — herkese açık
+
+**Tüm kategorileri getir** (parametresiz):
+
+```bash
+curl http://localhost:8080/api/v1/categories
+# -> [{"categoryId":1,"categoryName":"Kırtasiye","products":[]},{"categoryId":2,"categoryName":"Elektronik","products":[]}]
+```
+
+**Kategori oluştur:**
+
+```bash
+curl -X POST http://localhost:8080/api/v1/categories \
+  -H "Content-Type: application/json" \
+  -d '{"categoryName":"Kırtasiye"}'
+# 201 Created, Location: /api/v1/categories/1
+# -> {"categoryId":1,"categoryName":"Kırtasiye","products":null}
+```
 
 ```bash
 # Kategori adını getir (kategorinin ilk ürünü üzerinden)
