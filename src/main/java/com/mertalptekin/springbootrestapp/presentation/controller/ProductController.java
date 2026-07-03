@@ -27,7 +27,7 @@ import java.net.URI;
 
 
 @RestController
-@RequestMapping("/api/products") // Genel product endpoint'i
+@RequestMapping("/api/v1/products") // Genel product endpoint'i
 @Tag(name="Product Controller", description="Product ile ilgili işlemler için kullanılan controller, Clean Code Mimarisi ile geliştirildi")
 public class ProductController {
 
@@ -72,7 +72,7 @@ public class ProductController {
         // Ürün oluşturma işlemleri burada yapılacak
 
         var response = this.productCreateRequestHandler.handle(request);
-        var uri = URI.create("/api/products/" + response.getId()); // Oluşturulan kaynağın URI'si
+        var uri = URI.create("/api/v1/products/" + response.getId()); // Oluşturulan kaynağın URI'si
 
         return ResponseEntity.created(uri).body(response);
     }

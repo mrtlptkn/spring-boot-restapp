@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/categories")
+@RequestMapping("api/v1/categories")
 public class CategoryController {
 
     private final ICategoryRepository categoryRepository;

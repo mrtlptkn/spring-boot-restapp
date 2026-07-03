@@ -1,6 +1,7 @@
 package com.mertalptekin.springbootrestapp.application.product.createProduct;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mertalptekin.springbootrestapp.application.product.IProductRequest;
+import com.mertalptekin.springbootrestapp.application.product.createProduct.validation.NotReservedProductName;
 import jakarta.validation.constraints.*;
 
 
@@ -14,6 +15,7 @@ public record CreateProductRequest(
         @NotNull(message = "Product name must not be null")
         @NotEmpty(message = "Product name must not be empty")
         @Size(max = 20, message = "Product name must not exceed 20 characters")
+        @NotReservedProductName(message = "Product name must not be a reserved/placeholder value (e.g. 'test', 'deneme')")
         String name,
         @JsonProperty("unitPrice")
         @Positive(message = "Price must be positive")

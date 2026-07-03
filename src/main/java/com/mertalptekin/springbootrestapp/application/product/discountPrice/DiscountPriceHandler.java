@@ -26,10 +26,8 @@ public class DiscountPriceHandler implements IProductRequestHandler<DiscountPric
 
     // UseCase  -> Bütün Fiyat değişimlerini, fiyat güncellmeleri yapldığında ProductPrices tablosunda History olarak kaydetmek istiyoruz. UseCase
 
-    // @Transactional -> Postgresde bir dene H2 DB trasaction sorunlu.
-
     @Override
-    // @Transactional // Bu method içerisindeki işlemler tek bir transaction olarak ele alınır. Eğer bir işlem başarısız olursa, tüm işlemler geri alınır.
+    @Transactional // Fiyat güncelleme + ProductPrice history insert (event listener üzerinden) tek transaction'da; biri başarısız olursa tümü rollback olur.
     public DiscountPriceResponse handle(DiscountPriceRequest request) {
 
 

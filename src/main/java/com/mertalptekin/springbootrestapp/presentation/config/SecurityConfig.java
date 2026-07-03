@@ -11,6 +11,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableMethodSecurity
@@ -32,7 +37,7 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable); // Form istekleri www.urlencoded değil application/json bundan dolayı bu ayarı kapattık. Gelenek web uygulamalrındaki güvenlik ayarı.
         // Bunu kaldırınca Post isteklerinde 403 hatası alırız. uygulama keser.
 
-        http.cors(AbstractHttpConfigurer::disable); // react gibi bir clientdan tetst etmeyeceğiz.
+        http.cors(cors -> cors.configurationSource(corsConfigurationSource())); // React gibi farklı origin'den (örn. localhost:3000) gelen isteklere izin ver.
 
         // H2 Console için frame options'ı devre dışı bırak
         http.headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()));
@@ -46,11 +51,12 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui/**").permitAll()
                         .requestMatchers("/v3/api-docs/**").permitAll()
                         .requestMatchers("/swagger-ui.html").permitAll()
-                        .requestMatchers("/api/categories/**").permitAll()
-                        .requestMatchers("/api/courses/**").permitAll()
-                        .requestMatchers("/api/demo/**").hasAuthority("ROLE_MANAGER")
-                        .requestMatchers(("/api/auth/**")).permitAll()
+                        .requestMatchers("/api/v1/categories/**").permitAll()
+                        .requestMatchers("/api/v1/courses/**").permitAll()
+                        .requestMatchers("/api/v1/demo/**").hasAuthority("ROLE_MANAGER")
+                        .requestMatchers(("/api/v1/auth/**")).permitAll()
                         .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/actuator/health", "/actuator/info").permitAll()
                         .anyRequest().authenticated());
         http.authenticationProvider(authenticationProvider); // Kimlik doğrulama sağlayıcıyı ekliyoruz.
 
@@ -63,5 +69,20 @@ public class SecurityConfig {
 
         return http.build();
 
+    }
+
+    // CORS: farklı origin'den (ör. React dev sunucusu) gelen tarayıcı isteklerinin
+    // hangi koşullarda kabul edileceğini tanımlar.
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("http://localhost:3000"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 }

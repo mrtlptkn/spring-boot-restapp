@@ -16,10 +16,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-// /api/v1/auth izin ver.
 // Kullanıcı oluşturma token üretme, token refresh etme ve benzeri işlemler burada yapılacak.
 @RestController
-@RequestMapping("api/auth")
+@RequestMapping("api/v1/auth")
 public class AuthController {
 
 
