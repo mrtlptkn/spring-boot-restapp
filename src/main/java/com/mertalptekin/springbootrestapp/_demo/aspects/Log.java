@@ -5,7 +5,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.METHOD) // Anatasyonun metod seviyesinde kullanılmasını sağlar.
+
+@Target({ElementType.METHOD, ElementType.TYPE})
+// Anatasyonun metod seviyesinde kullanılmasını sağlar.
 @Retention(RetentionPolicy.RUNTIME)
 // Anatasonun çalışma zamanında erişilebilir olmasını sağlar.
 public @interface Log {
